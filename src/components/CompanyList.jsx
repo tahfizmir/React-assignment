@@ -43,62 +43,70 @@ export default function CompanyList() {
 
   return (
     <div className="max-w-6xl mx-auto p-4">
-      <h2 className="text-2xl font-semibold mb-4">Companies</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-indigo-700">Companies</h2>
 
       <div className="flex flex-col md:flex-row gap-2 md:items-end md:justify-between mb-4">
         <div className="flex gap-2 items-center">
           <input
-            className="border rounded px-3 py-2 w-64"
+            className="border rounded px-3 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-indigo-300"
             placeholder="Search by name or keyword"
             value={query}
             onChange={(e) => { setQuery(e.target.value); setPage(1) }}
           />
 
-          <select className="border rounded px-3 py-2" value={locationFilter} onChange={(e) => { setLocationFilter(e.target.value); setPage(1) }}>
+          <select className="border rounded px-3 py-2 bg-white/70" value={locationFilter} onChange={(e) => { setLocationFilter(e.target.value); setPage(1) }}>
             <option value="">All locations</option>
             {locations.map((l) => <option key={l} value={l}>{l}</option>)}
           </select>
 
-          <select className="border rounded px-3 py-2" value={industryFilter} onChange={(e) => { setIndustryFilter(e.target.value); setPage(1) }}>
+          <select className="border rounded px-3 py-2 bg-white/70" value={industryFilter} onChange={(e) => { setIndustryFilter(e.target.value); setPage(1) }}>
             <option value="">All industries</option>
             {industries.map((i) => <option key={i} value={i}>{i}</option>)}
           </select>
         </div>
 
         <div className="flex gap-2 items-center">
-          <label className="text-sm">Sort</label>
-          <select className="border rounded px-3 py-2" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <label className="text-sm text-gray-600">Sort</label>
+          <select className="border rounded px-3 py-2 bg-white/70" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
             <option value="name">Name</option>
             <option value="employees">Employees</option>
             <option value="location">Location</option>
           </select>
-          <select className="border rounded px-3 py-2" value={order} onChange={(e) => setOrder(e.target.value)}>
+          <select className="border rounded px-3 py-2 bg-white/70" value={order} onChange={(e) => setOrder(e.target.value)}>
             <option value="asc">Asc</option>
             <option value="desc">Desc</option>
           </select>
         </div>
       </div>
 
-      {loading && <div className="py-6 text-center">Loading companies…</div>}
+      {loading && <div className="py-6 text-center text-indigo-600">Loading companies…</div>}
       {error && <div className="py-6 text-center text-red-600">{error}</div>}
 
       {!loading && !error && (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {companies.map((c) => (
-              <div key={c.id} className="border rounded p-4 bg-white/5">
-                <h3 className="font-semibold text-lg">{c.name}</h3>
-                <p className="text-sm text-gray-300">{c.industry} • {c.location}</p>
-                <p className="mt-2 text-sm">Employees: <strong>{c.employees}</strong></p>
+            {companies.map((c, idx) => (
+              <div key={c.id} className={`rounded-lg p-4 shadow-md overflow-hidden`}>
+                <div className={`px-3 py-2 rounded-md text-white mb-3 ${idx % 3 === 0 ? 'bg-gradient-to-r from-indigo-500 to-purple-500' : idx % 3 === 1 ? 'bg-gradient-to-r from-emerald-400 to-teal-500' : 'bg-gradient-to-r from-pink-400 to-orange-400'}`}>
+                  <h3 className="font-bold text-lg">{c.name}</h3>
+                  <div className="text-sm opacity-90">{c.industry} • {c.location}</div>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="text-sm text-gray-700">Employees: <strong className="text-gray-900">{c.employees}</strong></div>
+                  <div className="flex gap-2">
+                    <button className="text-sm px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 hover:bg-indigo-100">View</button>
+                    <button className="text-sm px-3 py-1 rounded-full bg-white border hover:bg-gray-50">Contact</button>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
 
           <div className="flex items-center justify-between mt-6">
-            <div className="text-sm text-gray-400">Showing page {page} of {totalPages} — {total} companies</div>
+            <div className="text-sm text-gray-600">Showing page {page} of {totalPages} — {total} companies</div>
             <div className="flex gap-2">
-              <button className="px-3 py-1 border rounded" disabled={page <= 1} onClick={() => setPage((p) => Math.max(1, p - 1))}>Prev</button>
-              <button className="px-3 py-1 border rounded" disabled={page >= totalPages} onClick={() => setPage((p) => Math.min(totalPages, p + 1))}>Next</button>
+              <button className="px-3 py-1 rounded-md bg-white border shadow-sm" disabled={page <= 1} onClick={() => setPage((p) => Math.max(1, p - 1))}>Prev</button>
+              <button className="px-3 py-1 rounded-md bg-indigo-600 text-white shadow-sm" disabled={page >= totalPages} onClick={() => setPage((p) => Math.min(totalPages, p + 1))}>Next</button>
             </div>
           </div>
         </>
