@@ -9,10 +9,7 @@ export default function App() {
             <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">Company Directory</h1>
             <p className="text-sm opacity-90 mt-1">Browse, filter and sort companies</p>
           </div>
-          <div className="mt-4 md:mt-0 inline-flex gap-2">
-            <button className="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-full font-medium">Add company</button>
-            <button className="bg-white text-indigo-600 hover:bg-indigo-50 px-4 py-2 rounded-full font-medium">Sign in</button>
-          </div>
+         
         </div>
       </header>
       <main className="py-8">

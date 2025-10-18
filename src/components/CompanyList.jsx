@@ -93,10 +93,7 @@ export default function CompanyList() {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="text-sm text-gray-700">Employees: <strong className="text-gray-900">{c.employees}</strong></div>
-                  <div className="flex gap-2">
-                    <button className="text-sm px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 hover:bg-indigo-100">View</button>
-                    <button className="text-sm px-3 py-1 rounded-full bg-white border hover:bg-gray-50">Contact</button>
-                  </div>
+                
                 </div>
               </div>
             ))}
