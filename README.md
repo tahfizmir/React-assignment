@@ -1,3 +1,25 @@
+# react-assignment
+
+## Local dev
+
+This project includes a small mock API (json-server) and a React + Vite frontend styled with Tailwind.
+
+Install deps and run both servers (PowerShell):
+
+```powershell
+npm install
+npm run serve:api    # starts json-server on http://localhost:4000
+npm run dev          # starts Vite dev server
+```
+
+You can change the API base URL by creating a `.env` file with `VITE_API_BASE`.
+
+Example `.env`:
+
+```
+VITE_API_BASE=http://localhost:4000
+```
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
